@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <algorithm>
 using namespace std;
 //方法1，求全排列，用回溯算法
 vector<string>res;

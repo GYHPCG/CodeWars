@@ -3,7 +3,7 @@
  * @Author: CGPan
  * @Date: 2022-10-02 13:11:32
  * @LastEditors: CGPan
- * @LastEditTime: 2022-10-04 17:44:51
+ * @LastEditTime: 2022-10-04 19:20:47
  */
 #include <iostream>
 #include <vector>
@@ -70,52 +70,65 @@ class IntPart
 public:
   static std::string part(long long n);
 };
+
+//其他方法对整数分离
+void part_impl(std::vector<long long>& res, long long n, int from, int c_sum, int c_prod) {
+    if (c_sum == n) res.push_back(c_prod);
+    else for(int i = from; i <= n - c_sum; i++)
+    part_impl(res, n, i, c_sum + i, c_prod * i);
+}
 int main()
 {
     Enum.clear();
     path.clear();
     //cout << getEnum(4,4) << endl;
-    Count(7,7,path);
+    //Count(7,7,path);
     //int n = Enum.size();
-    vector<ll>Sorta;
-    for (int i = 0; i < Enum.size(); ++i) {
-        //Sorta.push_back(accumulate(Enum[i].begin(),Enum[i].end(),0));
-        int tmp = 1;
-        for (int j = 0; j < Enum[i].size(); ++j) {
-            tmp *= Enum[i][j];
-        }
-        Sorta.push_back(tmp);
+    //vector<ll>Sorta;
+//     for (int i = 0; i < Enum.size(); ++i) {
+//         //Sorta.push_back(accumulate(Enum[i].begin(),Enum[i].end(),0));
+//         int tmp = 1;
+//         for (int j = 0; j < Enum[i].size(); ++j) {
+//             tmp *= Enum[i][j];
+//         }
+//         Sorta.push_back(tmp);
+//     }
+//     //cout << n << endl;
+//     //cout << Sorta.size() << endl;
+//     sort(Sorta.begin(),Sorta.end());
+//     //去重
+//     auto ik = unique(Sorta.begin(),Sorta.end());
+//     Sorta.erase(ik,Sorta.end());
+//     // for (auto k : Sorta) {
+//     //     cout << k << " ";
+//     // }
+//     // cout << endl;
+//    // print(Enum);
+//     //获取range
+//     ll range = getRange(Sorta);
+//     cout << "range: " << range << endl;
+//    //获取平均值
+//     double av = getAverage(Sorta);
+//     //获取中位数
+//     double med = getMed(Sorta);
+//     string s = "Range: ";
+//    // char c = range + '0';
+//    string p = to_string(range);
+//     s += p;
+//     s += " Average: ";
+//     char k[5];
+//     sprintf(k,"%.2f",av);
+//     string sav = k;
+//     s += sav;
+//     s += " Median: ";
+//     sprintf(k,"%.2f",med);
+//     s += k;
+//     cout << s << endl;
+
+        //其他的获取
+    part_impl(path,4,1,0,1);
+    for (int i= 0; i < path.size(); ++i) {
+        cout << path[i] << " ";
     }
-    //cout << n << endl;
-    //cout << Sorta.size() << endl;
-    sort(Sorta.begin(),Sorta.end());
-    //去重
-    auto ik = unique(Sorta.begin(),Sorta.end());
-    Sorta.erase(ik,Sorta.end());
-    // for (auto k : Sorta) {
-    //     cout << k << " ";
-    // }
-    // cout << endl;
-   // print(Enum);
-    //获取range
-    ll range = getRange(Sorta);
-    cout << "range: " << range << endl;
-   //获取平均值
-    double av = getAverage(Sorta);
-    //获取中位数
-    double med = getMed(Sorta);
-    string s = "Range: ";
-   // char c = range + '0';
-   string p = to_string(range);
-    s += p;
-    s += " Average: ";
-    char k[5];
-    sprintf(k,"%.2f",av);
-    string sav = k;
-    s += sav;
-    s += " Median: ";
-    sprintf(k,"%.2f",med);
-    s += k;
-    cout << s << endl;
     return 0;
 }
